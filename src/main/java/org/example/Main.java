@@ -18,6 +18,11 @@ public class Main {
         WebElement butotnNotebook = driver.findElement(By.xpath("//a[@onclick=\"byCat('notebook')\"]"));
         WebElement butotnMonitor = driver.findElement(By.xpath("//a[@onclick=\"byCat('monitor')\"]"));
 
+//        carousel control
+        WebElement carouselControlPrev = driver.findElement(By.xpath("//a[@class=\"carousel-control-prev\" ]"));
+        WebElement carouselControlNext = driver.findElement(By.xpath("//a[@class=\"carousel-control-prev\" ]"));
+
+//        menu Header
         WebElement headerHome = driver.findElement(By.xpath("//ul[@class=\"navbar-nav ml-auto\"]/li[@class=\"nav-item active\"]"));
         WebElement headerContact = driver.findElement(By.xpath("//ul[@class=\"navbar-nav ml-auto\"]/li[@class=\"nav-item\"]/a[@data-target=\"#videoModal\"]"));
         WebElement headerAboutUs = driver.findElement(By.xpath("//ul[@class=\"navbar-nav ml-auto\"]/li[@class=\"nav-item\"]/a[@data-target=\"#videoModal\"]"));
@@ -25,11 +30,12 @@ public class Main {
         WebElement headerLogin = driver.findElement(By.xpath("//ul[@class=\"navbar-nav ml-auto\"]/li[@class=\"nav-item\"]/a[@data-target=\"#logInModal\"]"));
         WebElement headerSignUp = driver.findElement(By.xpath("//ul[@class=\"navbar-nav ml-auto\"]/li[@class=\"nav-item\"]/a[@data-target=\"#signInModal\"]"));
 
+//        item product
         WebElement imageItem = driver.findElement((By.xpath("//div[@class=\"card h-100\"]/a[@href=\"prod.html?idp_=1\"]")));
         WebElement titleItem = driver.findElement((By.xpath("//div[@class=\"card h-100\"]/div/h4/a[@href=\"prod.html?idp_=1\"]")));
         WebElement priceItem = driver.findElement((By.xpath("//img[@src=\"imgs/galaxy_s6.jpg\"]/parent::a[@href='prod.html?idp_=1']/following-sibling::div/h5")));
         WebElement descItem = driver.findElement((By.xpath("//img[@src=\"imgs/galaxy_s6.jpg\"]/parent::a[@href='prod.html?idp_=1']/following-sibling::div/p")));
-        System.out.println(descItem.getText());
+//        System.out.println(descItem.getText());
 //        imageItem.click();
     }
 }
