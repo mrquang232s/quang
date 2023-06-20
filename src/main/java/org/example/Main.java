@@ -27,6 +27,39 @@ public class Main {
         // Khởi tạo WebDriverWait với thời gian chờ là 20 giây
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
+        WebElement carouselControlNext = driver.findElement(By.xpath("//a[@class='carousel-control-next']"));
+        System.out.println("carouselControlNext: " + carouselControlNext.getText());
+        carouselControlNext.click();
+        WebElement carouselControlPrev = driver.findElement(By.xpath("//a[@class='carousel-control-prev']"));
+        System.out.println("carouselControlPrev: " + carouselControlPrev.getText());
+        carouselControlPrev.click();
+        Thread.sleep(1000);
+
+
+        By imageItemLocator = By.xpath("//div[@class='card h-100']/a[@href='prod.html?idp_=1']");
+        By titleItemLocator = By.xpath("//div[@class='card h-100']/div/h4/a[@href='prod.html?idp_=1']");
+        By priceItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=1']/following-sibling::div/h5");
+        By descItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=1']/following-sibling::div/p");
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(imageItemLocator));
+        WebElement imageItem = driver.findElement(imageItemLocator);
+        imageItem.click();
+        Thread.sleep(1000);
+        driver.navigate().back();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(titleItemLocator));
+        WebElement titleItem = driver.findElement(titleItemLocator);
+        System.out.println((titleItem.getText()));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(priceItemLocator));
+        WebElement priceItem = driver.findElement(priceItemLocator);
+        System.out.println((priceItem.getText()));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(descItemLocator));
+        WebElement descItem = driver.findElement(descItemLocator);
+        System.out.println((descItem.getText()));
+
         String a = "//li[@class='nav-item'][index]";
         WebElement header;
 
@@ -84,31 +117,10 @@ public class Main {
             categorys = driver.findElement((By.xpath(category.replace("value",listCategory[i]))));
             wait.until(ExpectedConditions.visibilityOf(categorys));
             wait.until(ExpectedConditions.elementToBeClickable(categorys));
+            System.out.println("Category: " + categorys.getText());
             categorys.click();
+
         }
 
-        By imageItemLocator = By.xpath("//div[@class='card h-100']/a[@href='prod.html?idp_=10']");
-        By titleItemLocator = By.xpath("//div[@class='card h-100']/div/h4/a[@href='prod.html?idp_=10']");
-        By priceItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=10']/following-sibling::div/h5");
-        By descItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=10']/following-sibling::div/p");
-
-
-        wait.until(ExpectedConditions.elementToBeClickable(imageItemLocator));
-        WebElement imageItem = driver.findElement(imageItemLocator);
-        imageItem.click();
-        Thread.sleep(1000);
-        driver.navigate().back();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(titleItemLocator));
-        WebElement titleItem = driver.findElement(titleItemLocator);
-        System.out.println((titleItem.getText()));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(priceItemLocator));
-        WebElement priceItem = driver.findElement(priceItemLocator);
-        System.out.println((priceItem.getText()));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(descItemLocator));
-        WebElement descItem = driver.findElement(descItemLocator);
-        System.out.println((descItem.getText()));
     }
 }
