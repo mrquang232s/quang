@@ -1,22 +1,24 @@
 package org.example;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class Main {
+
+
     public static void main(String[] args) throws InterruptedException {
 
+        EdgeOptions edgeOptions = new EdgeOptions();
+
         // Khởi tạo trình duyệt Chrome
-        EdgeDriver driver = new EdgeDriver();
+        EdgeDriver driver = new EdgeDriver(edgeOptions);
 
         // Mở trang web
         driver.get("https://www.demoblaze.com/");
@@ -27,100 +29,117 @@ public class Main {
         // Khởi tạo WebDriverWait với thời gian chờ là 20 giây
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        WebElement carouselControlNext = driver.findElement(By.xpath("//a[@class='carousel-control-next']"));
-        System.out.println("carouselControlNext: " + carouselControlNext.getText());
-        carouselControlNext.click();
-        WebElement carouselControlPrev = driver.findElement(By.xpath("//a[@class='carousel-control-prev']"));
-        System.out.println("carouselControlPrev: " + carouselControlPrev.getText());
-        carouselControlPrev.click();
+
+//**************************************************************************************************************************
         Thread.sleep(1000);
+        WebElement SSG = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/div[1]/div/a/img/.."));
+        wait.until(ExpectedConditions.visibilityOf(SSG));
+        wait.until(ExpectedConditions.elementToBeClickable(SSG));
+        SSG.click();
 
-
-        By imageItemLocator = By.xpath("//div[@class='card h-100']/a[@href='prod.html?idp_=1']");
-        By titleItemLocator = By.xpath("//div[@class='card h-100']/div/h4/a[@href='prod.html?idp_=1']");
-        By priceItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=1']/following-sibling::div/h5");
-        By descItemLocator = By.xpath("//img[@src='imgs/galaxy_s6.jpg']/parent::a[@href='prod.html?idp_=1']/following-sibling::div/p");
-
-
-        wait.until(ExpectedConditions.elementToBeClickable(imageItemLocator));
-        WebElement imageItem = driver.findElement(imageItemLocator);
-        imageItem.click();
         Thread.sleep(1000);
-        driver.navigate().back();
+        WebElement BtnATC = driver.findElement(By.xpath("//a[normalize-space()='Add to cart']"));
+        wait.until(ExpectedConditions.visibilityOf(BtnATC));
+        wait.until(ExpectedConditions.elementToBeClickable(BtnATC));
+        BtnATC.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(titleItemLocator));
-        WebElement titleItem = driver.findElement(titleItemLocator);
-        System.out.println((titleItem.getText()));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(priceItemLocator));
-        WebElement priceItem = driver.findElement(priceItemLocator);
-        System.out.println((priceItem.getText()));
+        Thread.sleep(1000);
+        Alert alert= driver.switchTo().alert();
+        alert.accept();
+        System.out.println("2");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(descItemLocator));
-        WebElement descItem = driver.findElement(descItemLocator);
-        System.out.println((descItem.getText()));
 
-        String a = "//li[@class='nav-item'][index]";
-        WebElement header;
+        Thread.sleep(1000);
+        WebElement BtnCart = driver.findElement(By.xpath("//*[@id=\"cartur\"]"));
+        wait.until(ExpectedConditions.visibilityOf(BtnCart));
+        wait.until(ExpectedConditions.elementToBeClickable(BtnCart));
+        BtnCart.click();
+        System.out.println("3");
 
-        for (int i = 1; i <= 7; i++) {
-            if (i != 5 && i != 6) {
-                header = driver.findElement((By.xpath(a.replace("index",String.valueOf(i)))));
-                wait.until(ExpectedConditions.visibilityOf(header));
-                wait.until(ExpectedConditions.elementToBeClickable(header));
-                header.click();
 
-                if(i == 1) {
-                    Thread.sleep(1000);
-                    WebElement close1 = driver.findElement(By.xpath("(//button[@type='button'][normalize-space()='Close'])[1]"));
-                    wait.until(ExpectedConditions.visibilityOf(close1));
-                    wait.until(ExpectedConditions.elementToBeClickable(close1));
-                    close1.click();
-                }
+        Thread.sleep(2000);
+        String infoProduct = "//tr[@class='success']/td[index]";
+        WebElement infoProducts;
 
-                if(i == 2) {
-                    Thread.sleep(1000);
-                    WebElement close2 = driver.findElement(By.xpath("(//button[@type='button'][normalize-space()='Close'])[4]"));
-                    wait.until(ExpectedConditions.visibilityOf(close2));
-                    wait.until(ExpectedConditions.elementToBeClickable(close2));
-                    close2.click();
-                }
+        for (int i = 1; i <= 4; i++) {
+            infoProducts = driver.findElement((By.xpath(infoProduct.replace("index",String.valueOf(i)))));
+            wait.until(ExpectedConditions.visibilityOf(infoProducts));
+            wait.until(ExpectedConditions.elementToBeClickable(infoProducts));
+            System.out.println("Category: " + infoProducts.getText());
 
-                if(i == 3) {
-                    Thread.sleep(1000);
-                    driver.navigate().back();
-                }
-
-                if(i == 4) {
-                    Thread.sleep(1000);
-                    WebElement close4 = driver.findElement(By.xpath("(//button[@type='button'][normalize-space()='Close'])[3]"));
-                    wait.until(ExpectedConditions.visibilityOf(close4));
-                    wait.until(ExpectedConditions.elementToBeClickable(close4));
-                    close4.click();
-                }
-
-                if(i == 7) {
-                    Thread.sleep(1000);
-                    WebElement close5 = driver.findElement(By.xpath("(//button[@type='button'][normalize-space()='Close'])[2]"));
-                    wait.until(ExpectedConditions.visibilityOf(close5));
-                    wait.until(ExpectedConditions.elementToBeClickable(close5));
-                    close5.click();
-                }
-            }
         }
 
-        String category = "(//a[normalize-space()='value'])[1]";
-        String[] listCategory = { "Phones", "Laptops", "Monitors" };
-        WebElement categorys;
+        By deleteproduct = By.xpath("//*[@id=\"tbodyid\"]/tr/td[4]/a");
+        wait.until(ExpectedConditions.elementToBeClickable(deleteproduct));
+        WebElement delete = driver.findElement(deleteproduct);
+        delete.click();
 
-        for (int i = 0; i <= 3; i++) {
-            categorys = driver.findElement((By.xpath(category.replace("value",listCategory[i]))));
-            wait.until(ExpectedConditions.visibilityOf(categorys));
-            wait.until(ExpectedConditions.elementToBeClickable(categorys));
-            System.out.println("Category: " + categorys.getText());
-            categorys.click();
+        Thread.sleep(1000);
+        WebElement BtnHome = driver.findElement(By.xpath("//*[@id=\"navbarExample\"]/ul/li[1]/a"));
+        BtnHome.click();
 
-        }
+        Thread.sleep(1000);
+        WebElement ImgNokia = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/div[2]/div/a/img"));
+        ImgNokia.click();
+
+        Thread.sleep(1000);
+        WebElement BtnATCNokia  = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/div[2]/div/a"));
+        BtnATCNokia.click();
+
+        Thread.sleep(1000);
+        Alert alert2= driver.switchTo().alert();
+        alert2.accept();
+
+        Thread.sleep(1000);
+        WebElement BtnCart2 = driver.findElement(By.xpath("//*[@id=\"cartur\"]"));
+        BtnCart2.click();
+
+
+//**************************************************************************************************************************
+
+
+        WebElement buttonPlaceOrder = driver.findElement(By.xpath("//button[normalize-space()='Place Order']"));
+        wait.until(ExpectedConditions.visibilityOf(buttonPlaceOrder));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonPlaceOrder));
+        buttonPlaceOrder.click();
+
+        Thread.sleep(1000);
+
+        WebElement nameInput = driver.findElement(By.id("name"));
+        nameInput.clear();
+        nameInput.sendKeys("Hiêu Nguyễn");
+
+        WebElement countryInput = driver.findElement(By.id("country"));
+        countryInput.clear();
+        countryInput.sendKeys("Việt Nam");
+
+        WebElement cityInput = driver.findElement(By.id("city"));
+        cityInput.clear();
+        cityInput.sendKeys("Hồ Chí Minh");
+
+        WebElement cardInput = driver.findElement(By.id("card"));
+        cardInput.clear();
+        cardInput.sendKeys("123");
+
+        WebElement monthInput = driver.findElement(By.id("month"));
+        monthInput.clear();
+        monthInput.sendKeys("06");
+
+        WebElement yearInput = driver.findElement(By.id("year"));
+        yearInput.clear();
+        yearInput.sendKeys("2023");
+
+        Thread.sleep(2000);
+
+        WebElement buttonClose = driver.findElement(By.xpath("//div[@id='orderModal']//button[@type='button'][normalize-space()='Close']"));
+        wait.until(ExpectedConditions.visibilityOf(buttonClose));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonClose));
+        buttonClose.click();
+        Thread.sleep(3000);
+
+        // Quit the driver
+        driver.quit();
 
     }
 }
