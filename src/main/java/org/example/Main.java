@@ -31,11 +31,63 @@ public class Main {
 
 
 //**************************************************************************************************************************
+
+
         Thread.sleep(1000);
-        WebElement SSG = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/div[1]/div/a/img/.."));
-        wait.until(ExpectedConditions.visibilityOf(SSG));
-        wait.until(ExpectedConditions.elementToBeClickable(SSG));
-        SSG.click();
+        WebElement login = driver.findElement(By.xpath("//a[@id='login2']"));
+        wait.until(ExpectedConditions.visibilityOf(login));
+        wait.until(ExpectedConditions.elementToBeClickable(login));
+        login.click();
+
+        Thread.sleep(1000);
+
+        WebElement usernameInput = driver.findElement(By.id("loginusername"));
+        usernameInput.clear();
+        usernameInput.sendKeys("admin");
+
+        Thread.sleep(1000);
+
+        WebElement passwordInput = driver.findElement(By.id("loginpassword"));
+        passwordInput.clear();
+        passwordInput.sendKeys("admin");
+
+        Thread.sleep(1000);
+        WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Log in']"));
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        loginButton.click();
+
+        Thread.sleep(2000);
+        WebElement navigateItem = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/div[1]/div/a/img/.."));
+        wait.until(ExpectedConditions.visibilityOf(navigateItem));
+        wait.until(ExpectedConditions.elementToBeClickable(navigateItem));
+        navigateItem.click();
+
+        Thread.sleep(1000);
+        WebElement titleItem = driver.findElement(By.xpath("//h2[normalize-space()='Samsung galaxy s6']"));
+        wait.until(ExpectedConditions.visibilityOf(titleItem));
+        wait.until(ExpectedConditions.elementToBeClickable(titleItem));
+        System.out.println(titleItem.getText());
+
+        Thread.sleep(1000);
+        WebElement priceItem = driver.findElement(By.xpath("//h3[@class='price-container']"));
+        wait.until(ExpectedConditions.visibilityOf(priceItem));
+        wait.until(ExpectedConditions.elementToBeClickable(priceItem));
+        System.out.println(priceItem.getText());
+
+        Thread.sleep(1000);
+        WebElement strongItem = driver.findElement(By.xpath("//strong[normalize-space()='Product description']"));
+        wait.until(ExpectedConditions.visibilityOf(strongItem));
+        wait.until(ExpectedConditions.elementToBeClickable(strongItem));
+        System.out.println(strongItem.getText());
+
+        Thread.sleep(1000);
+        WebElement descriptionItem = driver.findElement(By.xpath("//div[@id=\"more-information\"]/p"));
+        wait.until(ExpectedConditions.visibilityOf(descriptionItem));
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionItem));
+        System.out.println(descriptionItem.getText());
+
+        //**************************************************************************************************************************\
 
         Thread.sleep(1000);
         WebElement BtnATC = driver.findElement(By.xpath("//a[normalize-space()='Add to cart']"));
@@ -47,7 +99,6 @@ public class Main {
         Thread.sleep(1000);
         Alert alert= driver.switchTo().alert();
         alert.accept();
-        System.out.println("2");
 
 
         Thread.sleep(1000);
@@ -55,7 +106,7 @@ public class Main {
         wait.until(ExpectedConditions.visibilityOf(BtnCart));
         wait.until(ExpectedConditions.elementToBeClickable(BtnCart));
         BtnCart.click();
-        System.out.println("3");
+
 
 
         Thread.sleep(2000);
